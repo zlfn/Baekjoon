@@ -1,0 +1,56 @@
+#include <stdio.h>
+void trip(int, int, int, char**);
+int main()
+{
+    char** display;
+    int size;
+    scanf("%d",&size);
+
+    display = new char*[size];
+    for(int i = 0; i<size; i++)
+    {
+        display[i] = new char[size];
+        for(int j = 0; j < size; j++)
+        {
+            display[i][j] = ' ';
+        }
+    }
+
+    trip(size, 0, 0, display);
+
+    for(int i = 0; i<size; i++)
+    {
+        for(int j = 0; j < size; j++)
+        {
+            printf("%c", display[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void trip(int size, int x, int y, char** display)
+{
+    if(size>3)
+    {
+        trip(size/3,x,y,display);
+        trip(size/3,x+size/3,y,display);
+        trip(size/3,x+2*(size/3),y,display);
+        trip(size/3,x,y+size/3,display);
+        trip(size/3,x+2*(size/3),y+size/3,display);
+        trip(size/3,x,y+2*(size/3),display);
+        trip(size/3,x+size/3,y+2*(size/3),display);
+        trip(size/3,x+2*(size/3),y+2*(size/3),display);
+    }
+    else
+    {
+        display[x][y] = '*';
+        display[x+1][y] = '*';
+        display[x+2][y] = '*';
+        display[x][y+1] = '*';
+        display[x+2][y+1] = '*';
+        display[x][y+2] = '*';
+        display[x+1][y+2] = '*';
+        display[x+2][y+2] = '*';
+        return;
+    }
+}
